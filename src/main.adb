@@ -4,7 +4,7 @@ with Ada.Float_Text_IO; use Ada.Float_Text_IO;
 with Ada.Calendar; use Ada.Calendar;
 
 procedure Main is
-   Num_Of_Threads : Integer := 2;
+   Num_Of_Threads : Integer;
    Num_Of_Seconds : Integer;
 
    Stop_Threads : Boolean := False;
@@ -32,7 +32,7 @@ procedure Main is
    end Abacus;
 
    task body Abacus is
-      Sum : Long_Long_Integer := 0; -- Initialize Sum as Float
+      Sum : Long_Long_Integer := 0;
       Steps : Integer:= 0;
       ID : Integer;
       Step : Integer;
@@ -56,10 +56,10 @@ procedure Main is
    Step : Integer;
 begin
    Put_Line("Enter number of threads:");
-   Num_Of_Threads := Integer'Value(Get_Line);  -- Read a line of text from the console
+   Num_Of_Threads := Integer'Value(Get_Line);
 
    Put_Line("Enter duration of calculation:");
-   Num_Of_Seconds := Integer'Value(Get_Line);  -- Read a line of text from the console
+   Num_Of_Seconds := Integer'Value(Get_Line);
 
    declare
       Threads: AbacusArr (1 .. Num_Of_Threads);
@@ -74,6 +74,6 @@ begin
       for I in Threads'Range loop
          Threads(I).Start(I, Steps(I));
       end loop;
-      Halting.Start(Num_Of_Seconds); -- Start halt task
+      Halting.Start(Num_Of_Seconds);
    end;
 end Main;
